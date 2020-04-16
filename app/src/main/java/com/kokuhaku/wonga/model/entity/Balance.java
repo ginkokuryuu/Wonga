@@ -13,7 +13,17 @@ public class Balance {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
+    //0 pemasukan
+    //1 pengeluaran
     private int jenis;
+
+    //Income
+    //Transport
+    //Food
+    //Medical
+    //Misc
+    //Receivables
+    //Debts
     private String sumber;
     private int jumlah;
 

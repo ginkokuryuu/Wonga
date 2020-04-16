@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="205dp"
+    android:layout_marginVertical="40dp"
+    android:layout_marginLeft="20dp"
+    app:cardCornerRadius="24dp"
+    app:cardBackgroundColor="@color/expensesBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tanggal_expenses_list"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="03 March\n1999"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="25dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="Rp "
+                android:paddingLeft="8dp"
+                android:paddingTop="20dp"
+                android:textSize="24sp"
+                android:textColor="@color/expensesText"/>
+            <TextView
+                android:id="@+id/jumlah_expenses_list"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:text="99.999"
+                android:paddingRight="8dp"
+                android:paddingTop="20dp"
+                android:textSize="24sp"
+                android:textColor="@color/expensesText"/>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/jam_expenses_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23:59"
+            android:paddingHorizontal="8dp"
+            android:layout_gravity="bottom|right"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

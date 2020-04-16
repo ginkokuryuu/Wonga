@@ -3,4 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="expensesBackground">#D6D6D6</color>
+    <color name="expensesText">#869489</color>
+
+    <color name="mainBackground">#D2B132</color>
+
+    <color name="buttonSideMain">#FFD227</color>
+    <color name="addButton">#49AF11</color>
+
+
+    <color name="white">#FFFFFF</color>
 </resources>

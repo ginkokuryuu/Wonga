@@ -31,7 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static synchronized AppDatabase GetInstance(Context context){
         if(INSTANCE == null){
-            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "app_database")
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, "wonga_database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();

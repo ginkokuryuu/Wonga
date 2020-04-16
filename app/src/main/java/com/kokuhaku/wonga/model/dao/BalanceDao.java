@@ -20,4 +20,7 @@ public interface BalanceDao {
 
     @Query("SELECT * FROM balance_table ORDER BY tanggal DESC")
     LiveData<List<Balance>> GetAllBalance();
+
+    @Query("SELECT totalUang FROM balance_table ORDER BY tanggal DESC LIMIT 1")
+    LiveData<Integer> GetCurrentBalanceLiveData();
 }
