@@ -4,17 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.FoodActivity"
-    android:background="@color/white">
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/expenses_recycle_list"
-        android:layout_width="match_parent"
-        android:layout_height="285dp"
-        tools:listitem="@layout/expenses_item_list" />
+    tools:context=".view.BalanceActivity"
+    android:background="@color/balanceActBack">
 
     <LinearLayout
-        android:id="@+id/bottom_sheet_expense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:background="@drawable/current_balance">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Balance"
+                android:textColor="@color/almostGreyBalance"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:textSize="24sp"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/curr_balance_recycler_balance"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                tools:listitem="@layout/curr_balance"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaction"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="30dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/lightGreenBalance"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/list_transaction_item"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet_balance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -26,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add New Expenses"
+            android:text="Add Income"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -34,7 +66,7 @@
             android:layout_marginVertical="10dp"/>
 
         <EditText
-            android:id="@+id/add_expenses_et"
+            android:id="@+id/add_income_et"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_rectangle"
@@ -43,9 +75,9 @@
             android:layout_gravity="center"
             android:layout_marginVertical="20dp"
             android:inputType="number"/>
-        
+
         <Button
-            android:id="@+id/save_expenses_btn"
+            android:id="@+id/save_income_btn"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@drawable/add_expenses_button"

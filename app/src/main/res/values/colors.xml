@@ -12,6 +12,11 @@
     <color name="buttonSideMain">#FFD227</color>
     <color name="addButton">#49AF11</color>
 
+    <color name="balanceActBack">#5C8055</color>
+    <color name="balanceActCurr">#3F573A</color>
+    <color name="lightGreenBalance">#93CC88</color>
+    <color name="almostGreyBalance">#A8B8AC</color>
+
 
     <color name="white">#FFFFFF</color>
 </resources>
