@@ -1,15 +1,20 @@
 package com.kokuhaku.wonga;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
 import com.kokuhaku.wonga.model.dao.BalanceDao;
 import com.kokuhaku.wonga.model.dao.ExpensesDao;
+import com.kokuhaku.wonga.model.dao.ReportDao;
 import com.kokuhaku.wonga.model.entity.Balance;
 import com.kokuhaku.wonga.model.entity.Expenses;
+import com.kokuhaku.wonga.model.entity.Report;
 import com.kokuhaku.wonga.utils.AppUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AppRepository {
@@ -23,6 +28,9 @@ public class AppRepository {
     private LiveData<List<Expenses>> allMedical;
     private LiveData<List<Expenses>> allMisc;
 
+    private ReportDao reportDao;
+    private LiveData<List<Report>> allReports;
+
     public AppRepository(Application application) {
         AppDatabase database = AppDatabase.GetInstance(application);
 
@@ -35,35 +43,58 @@ public class AppRepository {
         allFood = expensesDao.GetAllFood();
         allMedical = expensesDao.GetAllMedical();
         allMisc = expensesDao.GetAllMisc();
+
+        reportDao = database.ReportDao();
+        allReports = reportDao.GetAllReport();
     }
 
-    public void InsertIncome(Balance balance){
+    public void InsertIncome(Balance balance) {
         AppDatabase.databaseWriterExecutor.execute(() -> {
+            int currentBalance = balanceDao.GetCurrentBalanceInteger() + balance.getJumlah();
+            balance.setTotalUang(currentBalance);
+
             balanceDao.Inset(balance);
+
+            Report report = reportDao.GetReport(balance.getTanggal());
+            if (report != null) {
+                report.setJumlah(report.getJumlah() + balance.getJumlah());
+                reportDao.Update(report);
+            } else {
+                report = new Report(balance.getJumlah(), balance.getTanggal());
+                reportDao.Insert(report);
+            }
         });
     }
 
-    public void InsertExpenses(Expenses expenses){
+    public void InsertExpenses(Expenses expenses) {
         AppDatabase.databaseWriterExecutor.execute(() -> {
             expensesDao.Insert(expenses);
 
             String sumber;
             int tipe = expenses.getTipe();
-            if(tipe == 0){
+            if (tipe == 0) {
                 sumber = "Transport";
-            }
-            else if(tipe == 1){
+            } else if (tipe == 1) {
                 sumber = "Food";
-            }
-            else if(tipe == 2){
+            } else if (tipe == 2) {
                 sumber = "Medical";
-            }
-            else{
+            } else {
                 sumber = "Misc";
             }
 
-            int currentBalance = currentBalanceLive.getValue() - expenses.getJumlah();
+            int currentBalance = balanceDao.GetCurrentBalanceInteger() - expenses.getJumlah();
+
             Balance balance = new Balance(1, sumber, expenses.getJumlah(), expenses.getTanggal(), currentBalance);
+            balanceDao.Inset(balance);
+
+            Report report = reportDao.GetReport(balance.getTanggal());
+            if (report != null) {
+                report.setJumlah(report.getJumlah() - balance.getJumlah());
+                reportDao.Update(report);
+            } else {
+                report = new Report(-(balance.getJumlah()), balance.getTanggal());
+                reportDao.Insert(report);
+            }
         });
     }
 
@@ -89,5 +120,9 @@ public class AppRepository {
 
     public LiveData<List<Expenses>> getAllMisc() {
         return allMisc;
+    }
+
+    public LiveData<List<Report>> getAllReports() {
+        return allReports;
     }
 }

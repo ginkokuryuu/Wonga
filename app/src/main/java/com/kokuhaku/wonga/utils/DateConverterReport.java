@@ -8,8 +8,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
-public class DateConverterBalance {
-    private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+public class DateConverterReport {
+    private static DateFormat df = new SimpleDateFormat("yyyy-MM");
 
     @TypeConverter
     public static Date fromTimestamp(String value){

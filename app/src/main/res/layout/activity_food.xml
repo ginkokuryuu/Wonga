@@ -7,14 +7,43 @@
     tools:context=".view.FoodActivity"
     android:background="@color/white">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/expenses_recycle_list"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="285dp"
-        tools:listitem="@layout/expenses_item_list" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Food"
+                android:textSize="42sp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"/>
+
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:src="@drawable/food"
+                android:layout_marginStart="40dp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/food_recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="285dp"
+            tools:listitem="@layout/expenses_item_list" />
+    </LinearLayout>
+
+
 
     <LinearLayout
-        android:id="@+id/bottom_sheet_expense"
+        android:id="@+id/bottom_sheet_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -34,7 +63,7 @@
             android:layout_marginVertical="10dp"/>
 
         <EditText
-            android:id="@+id/add_expenses_et"
+            android:id="@+id/add_food_et"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_rectangle"
@@ -45,7 +74,7 @@
             android:inputType="number"/>
         
         <Button
-            android:id="@+id/save_expenses_btn"
+            android:id="@+id/save_food_btn"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@drawable/add_expenses_button"

@@ -11,15 +11,18 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.kokuhaku.wonga.model.dao.BalanceDao;
 import com.kokuhaku.wonga.model.dao.ExpensesDao;
+import com.kokuhaku.wonga.model.dao.ReportDao;
 import com.kokuhaku.wonga.model.entity.Balance;
 import com.kokuhaku.wonga.model.entity.Expenses;
+import com.kokuhaku.wonga.model.entity.Report;
 import com.kokuhaku.wonga.utils.AppUtils;
 import com.kokuhaku.wonga.utils.DateConverterBalance;
 
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Balance.class, Expenses.class}, version = 3)
+@Database(entities = {Balance.class, Expenses.class, Report.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 
@@ -28,6 +31,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract BalanceDao BalanceDao();
     public abstract ExpensesDao ExpensesDao();
+    public abstract ReportDao ReportDao();
 
     public static synchronized AppDatabase GetInstance(Context context){
         if(INSTANCE == null){
@@ -47,13 +51,17 @@ public abstract class AppDatabase extends RoomDatabase {
             AppDatabase.databaseWriterExecutor.execute(() ->{
                 BalanceDao balanceDao = AppDatabase.INSTANCE.BalanceDao();
                 ExpensesDao expensesDao = AppDatabase.INSTANCE.ExpensesDao();
+                ReportDao reportDao = AppDatabase.INSTANCE.ReportDao();
 
-                balanceDao.Inset(new Balance(0, "Income", 0, AppUtils.getCurrentDateTIme(), 0));
+                Date dateNow = AppUtils.getCurrentDateTIme();
 
-                expensesDao.Insert(new Expenses(0, 0, AppUtils.getCurrentDateTIme()));
-                expensesDao.Insert(new Expenses(0, 1, AppUtils.getCurrentDateTIme()));
-                expensesDao.Insert(new Expenses(0, 2, AppUtils.getCurrentDateTIme()));
-                expensesDao.Insert(new Expenses(0, 3, AppUtils.getCurrentDateTIme()));
+                balanceDao.Inset(new Balance(0, "Income", 0, dateNow, 0));
+                reportDao.Insert(new Report(0, dateNow));
+
+                expensesDao.Insert(new Expenses(0, 0, dateNow));
+                expensesDao.Insert(new Expenses(0, 1, dateNow));
+                expensesDao.Insert(new Expenses(0, 2, dateNow));
+                expensesDao.Insert(new Expenses(0, 3, dateNow));
             });
         }
     };

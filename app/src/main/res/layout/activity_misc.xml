@@ -4,60 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.BalanceActivity"
-    android:background="@color/balanceActBack">
+    tools:context=".view.MiscActivity"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="vertical"
-            android:background="@drawable/current_balance">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current Balance"
-                android:textColor="@color/almostGreyBalance"
+                android:text="Misc"
+                android:textSize="42sp"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:textSize="24sp"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/curr_balance_recycler_balance"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                tools:listitem="@layout/curr_balance"/>
+                android:layout_margin="20dp"/>
+
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:src="@drawable/misc"
+                android:layout_marginStart="40dp"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/report_recycler_view"
-            android:layout_marginTop="30dp"
+            android:id="@+id/misc_recycle_list"
             android:layout_width="match_parent"
-            android:layout_height="205dp"
-            tools:listitem="@layout/report_list_item"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Transaction"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="30dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/lightGreenBalance"/>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_trans_recycler_balance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="80dp"
-            tools:listitem="@layout/list_transaction_item"
-            android:layout_marginHorizontal="20dp"/>
+            android:layout_height="285dp"
+            tools:listitem="@layout/expenses_item_list" />
     </LinearLayout>
 
+
+
     <LinearLayout
-        android:id="@+id/bottom_sheet_balance"
+        android:id="@+id/bottom_sheet_misc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -69,7 +55,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add Income"
+            android:text="Add New Expenses"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textAlignment="center"
@@ -77,7 +63,7 @@
             android:layout_marginVertical="10dp"/>
 
         <EditText
-            android:id="@+id/add_income_et"
+            android:id="@+id/add_misc_et"
             android:layout_width="300dp"
             android:layout_height="40dp"
             android:background="@drawable/rounded_rectangle"
@@ -88,7 +74,7 @@
             android:inputType="number"/>
 
         <Button
-            android:id="@+id/save_income_btn"
+            android:id="@+id/save_misc_btn"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@drawable/add_expenses_button"

@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kokuhaku.wonga.R;
+import com.kokuhaku.wonga.model.entity.Balance;
 
 public class BalanceAdapterMain extends RecyclerView.Adapter<BalanceAdapterMain.BalanceHolderMain> {
-    private int currentBalance = 0;
+    private int currentBalance = new Integer("0");
+    public onItemClickListener listener;
 
     @NonNull
     @Override
@@ -31,9 +33,13 @@ public class BalanceAdapterMain extends RecyclerView.Adapter<BalanceAdapterMain.
         return 1;
     }
 
-    public void SetCurrentBalance(Integer currentBalance){
-        this.currentBalance = currentBalance;
+    public void SetCurrentBalance(Integer _currentBalance){
+        currentBalance = _currentBalance;
         notifyDataSetChanged();
+    }
+
+    public int GetCurrentBalance(){
+        return currentBalance;
     }
 
     class BalanceHolderMain extends RecyclerView.ViewHolder{
@@ -42,6 +48,24 @@ public class BalanceAdapterMain extends RecyclerView.Adapter<BalanceAdapterMain.
         public BalanceHolderMain(@NonNull View itemView) {
             super(itemView);
             currentBalanceTV = itemView.findViewById(R.id.current_balance_main);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    if(listener != null && pos != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(currentBalance);
+                    }
+                }
+            });
         }
+    }
+
+    public interface onItemClickListener{
+        void onItemClick(int currBalance);
+    }
+
+    public void setOnClickListener(onItemClickListener _listener){
+        listener = _listener;
     }
 }

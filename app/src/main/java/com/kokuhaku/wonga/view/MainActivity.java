@@ -8,11 +8,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.kokuhaku.wonga.R;
 import com.kokuhaku.wonga.model.adapter.BalanceAdapterMain;
+import com.kokuhaku.wonga.model.adapter.MiscListAdapter;
+import com.kokuhaku.wonga.model.entity.Balance;
 import com.kokuhaku.wonga.viewmodel.BalanceViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        balanceAdapterMain.setOnClickListener(new BalanceAdapterMain.onItemClickListener() {
+            @Override
+            public void onItemClick(int currBalance) {
+                startActivity(new Intent(MainActivity.this, BalanceActivity.class));
+            }
+        });
+
         SetExpensesButton();
     }
 
@@ -51,6 +63,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, FoodActivity.class));
+            }
+        });
+
+        transport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TransportActivity.class));
+            }
+        });
+
+        medical.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MedicalActivity.class));
+            }
+        });
+
+        misc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MiscActivity.class));
             }
         });
     }

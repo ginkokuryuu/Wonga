@@ -44,6 +44,14 @@ public class Balance {
         this.id = id;
     }
 
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
+    }
+
+    public void setTotalUang(int totalUang) {
+        this.totalUang = totalUang;
+    }
+
     public int getId() {
         return id;
     }

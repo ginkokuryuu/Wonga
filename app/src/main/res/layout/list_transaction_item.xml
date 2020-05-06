@@ -6,23 +6,32 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/add_expenses_button"/>
+            android:src="@drawable/add_expenses_button"
+            android:layout_marginEnd="10dp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center|left">
             <TextView
+                android:id="@+id/source_balance_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Type"/>
+                android:text="Type"
+                android:textStyle="bold"
+                android:textColor="@color/white"/>
             <TextView
+                android:id="@+id/date_balance_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="April 29"/>
+                android:text="April 29"
+                android:textColor="@color/lightGreenBalance"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,11 +41,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rp "/>
+                android:text="Rp "
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
             <TextView
+                android:id="@+id/jumlah_balance_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99.999"/>
+                android:text="99.999"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
         </LinearLayout>
     </LinearLayout>
 
