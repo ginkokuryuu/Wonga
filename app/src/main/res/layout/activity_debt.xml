@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DebtActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Debts"
+                android:textSize="42sp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"/>
+
+            <ImageView
+                android:layout_width="240dp"
+                android:layout_height="240dp"
+                android:src="@drawable/money"
+                android:layout_marginStart="40dp"/>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/debt_recycle_list"
+            android:layout_width="match_parent"
+            android:layout_height="285dp"
+            tools:listitem="@layout/debts_item_list" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_sheet_debt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_hideable = "false"
+        app:behavior_peekHeight="70dp"
+        android:background="@drawable/add_expenses_shape">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add New Debt"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="32sp"
+            android:layout_marginVertical="10dp"/>
+
+        <EditText
+            android:id="@+id/add_debt_person_et"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_rectangle"
+            android:hint="The Person"
+            android:paddingLeft="20dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="20dp" />
+
+        <EditText
+            android:id="@+id/add_debt_amount_et"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:background="@drawable/rounded_rectangle"
+            android:hint="Amount"
+            android:paddingLeft="20dp"
+            android:layout_gravity="center"
+            android:layout_marginVertical="20dp"
+            android:inputType="number"/>
+
+        <Button
+            android:id="@+id/save_debt_btn"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/add_expenses_button"
+            android:text="ADD"
+            android:textColor="@color/white"
+            android:layout_gravity="bottom|right"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"/>
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

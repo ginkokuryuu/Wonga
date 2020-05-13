@@ -6,9 +6,11 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 
 import com.kokuhaku.wonga.model.dao.BalanceDao;
+import com.kokuhaku.wonga.model.dao.DandRDao;
 import com.kokuhaku.wonga.model.dao.ExpensesDao;
 import com.kokuhaku.wonga.model.dao.ReportDao;
 import com.kokuhaku.wonga.model.entity.Balance;
+import com.kokuhaku.wonga.model.entity.DandR;
 import com.kokuhaku.wonga.model.entity.Expenses;
 import com.kokuhaku.wonga.model.entity.Report;
 import com.kokuhaku.wonga.utils.AppUtils;
@@ -31,6 +33,10 @@ public class AppRepository {
     private ReportDao reportDao;
     private LiveData<List<Report>> allReports;
 
+    private DandRDao dandRDao;
+    private LiveData<List<DandR>> allDebts;
+    private LiveData<List<DandR>> allReceivables;
+
     public AppRepository(Application application) {
         AppDatabase database = AppDatabase.GetInstance(application);
 
@@ -46,6 +52,10 @@ public class AppRepository {
 
         reportDao = database.ReportDao();
         allReports = reportDao.GetAllReport();
+
+        dandRDao = database.DandRDao();
+        allDebts = dandRDao.GetAllDebts();
+        allReceivables = dandRDao.GetAllReceivables();
     }
 
     public void InsertIncome(Balance balance) {
@@ -98,6 +108,52 @@ public class AppRepository {
         });
     }
 
+    public void InsertDandR(DandR dandR){
+        AppDatabase.databaseWriterExecutor.execute(() -> {
+            dandRDao.Insert(dandR);
+        });
+    }
+
+    public void PayDebt(DandR dandR){
+        AppDatabase.databaseWriterExecutor.execute(() -> {
+            int currentBalance = balanceDao.GetCurrentBalanceInteger() - dandR.getJumlah();
+
+            Balance balance = new Balance(1, "Debt", dandR.getJumlah(), AppUtils.getCurrentDateTIme(), currentBalance);
+            balanceDao.Inset(balance);
+
+            Report report = reportDao.GetReport(balance.getTanggal());
+            if (report != null) {
+                report.setJumlah(report.getJumlah() - balance.getJumlah());
+                reportDao.Update(report);
+            } else {
+                report = new Report(-(balance.getJumlah()), balance.getTanggal());
+                reportDao.Insert(report);
+            }
+
+            dandRDao.Delete(dandR);
+        });
+    }
+
+    public void ReceiveReceivables(DandR dandR){
+        AppDatabase.databaseWriterExecutor.execute(() -> {
+            int currentBalance = balanceDao.GetCurrentBalanceInteger() + dandR.getJumlah();
+
+            Balance balance = new Balance(0, "Receivable", dandR.getJumlah(), AppUtils.getCurrentDateTIme(), currentBalance);
+            balanceDao.Inset(balance);
+
+            Report report = reportDao.GetReport(balance.getTanggal());
+            if (report != null) {
+                report.setJumlah(report.getJumlah() + balance.getJumlah());
+                reportDao.Update(report);
+            } else {
+                report = new Report(balance.getJumlah(), balance.getTanggal());
+                reportDao.Insert(report);
+            }
+
+            dandRDao.Delete(dandR);
+        });
+    }
+
     public LiveData<Integer> getCurrentBalanceLive() {
         return currentBalanceLive;
     }
@@ -124,5 +180,13 @@ public class AppRepository {
 
     public LiveData<List<Report>> getAllReports() {
         return allReports;
+    }
+
+    public LiveData<List<DandR>> getAllDebts() {
+        return allDebts;
+    }
+
+    public LiveData<List<DandR>> getAllReceivables() {
+        return allReceivables;
     }
 }

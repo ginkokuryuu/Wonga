@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.kokuhaku.wonga.R;
@@ -27,6 +30,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean previouslyStarted = prefs.getBoolean("started", false);
+        if(!previouslyStarted) {
+            startActivity(new Intent(MainActivity.this, InitialActivity.class));
+        }
 
         RecyclerView balanceRecyclerView = findViewById(R.id.balance_recycler_main);
         balanceRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -51,6 +60,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
         SetExpensesButton();
+        SetDebtAndReceiveBtn();
+    }
+
+    private void SetDebtAndReceiveBtn(){
+        View debtBtn = findViewById(R.id.main_debt_btn);
+        View receiveBtn = findViewById(R.id.main_receive_btn);
+
+        debtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DebtActivity.class));
+            }
+        });
+
+        receiveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ReceivableActivity.class));
+            }
+        });
     }
 
     private void SetExpensesButton(){

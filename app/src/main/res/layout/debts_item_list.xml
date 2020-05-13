@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginVertical="40dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="160dp"
+            android:layout_height="205dp"
+            android:background="@drawable/button_main"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tanggal_dandr"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:paddingHorizontal="8dp"
+                    android:paddingTop="25dp"
+                    android:text="03 March\n1999"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="20dp"
+                        android:text="Rp "
+                        android:textColor="@color/expensesText"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/jumlah_dandr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="8dp"
+                        android:text="99.999"
+                        android:textColor="@color/expensesText"
+                        android:textSize="24sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/ke_siapa_dandr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:padding="8dp"
+                    android:paddingHorizontal="8dp"
+                    android:text="Ke Siapa" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/pay_btn_dandr"
+            android:layout_width="50dp"
+            android:layout_height="70dp"
+            android:background="@drawable/button_side_main"
+            android:text="Pay"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

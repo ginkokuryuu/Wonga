@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionListAdapter extends RecyclerView.Adapter<TransactionListAdapter.TransactionListHolder> {
+
     private List<Balance> allBalances = new ArrayList<>();
 
     @NonNull

@@ -8,27 +8,44 @@
     app:cardCornerRadius="50dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_gravity="center">
-
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current Balance"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textColor="@color/almostGreyBalance"/>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Rp "
-            android:textSize="14dp"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
 
-        <TextView
-            android:id="@+id/current_balance_main"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="999999"
-            android:textSize="32dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Rp "
+                android:textSize="14dp"
+                android:textStyle="bold"/>
 
+            <TextView
+                android:id="@+id/current_balance_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="999999"
+                android:textSize="32dp"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
     </LinearLayout>
+
+
 
 
 

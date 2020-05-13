@@ -22,8 +22,8 @@ public class Balance {
     //Food
     //Medical
     //Misc
-    //Receivables
     //Debts
+    //Receivables
     private String sumber;
     private int jumlah;
 

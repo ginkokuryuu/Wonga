@@ -12,7 +12,7 @@ import com.kokuhaku.wonga.R;
 import com.kokuhaku.wonga.model.entity.Balance;
 
 public class BalanceAdapterMain extends RecyclerView.Adapter<BalanceAdapterMain.BalanceHolderMain> {
-    private int currentBalance = new Integer("0");
+    private Integer currentBalance = new Integer("0");
     public onItemClickListener listener;
 
     @NonNull
@@ -34,7 +34,12 @@ public class BalanceAdapterMain extends RecyclerView.Adapter<BalanceAdapterMain.
     }
 
     public void SetCurrentBalance(Integer _currentBalance){
-        currentBalance = _currentBalance;
+        if(currentBalance != null) {
+            currentBalance = _currentBalance;
+        }
+        else{
+            currentBalance = 0;
+        }
         notifyDataSetChanged();
     }
 
