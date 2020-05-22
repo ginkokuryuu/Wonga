@@ -70,7 +70,7 @@ public class ReceivableActivity extends AppCompatActivity {
                 String personS = person.getText().toString();
                 int amountI = Integer.parseInt(amount.getText().toString());
 
-                DandR newDandR = new DandR(1, personS, amountI, AppUtils.getCurrentDateTIme());
+                DandR newDandR = new DandR(1, personS, amountI, AppUtils.getCurrentDateTIme(), AppUtils.getCurrentDateTIme(), 0);
                 dandRViewModel.Insert(newDandR);
 
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);

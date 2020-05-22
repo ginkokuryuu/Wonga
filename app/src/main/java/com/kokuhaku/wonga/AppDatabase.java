@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Balance.class, Expenses.class, Report.class, DandR.class}, version = 3)
+@Database(entities = {Balance.class, Expenses.class, Report.class, DandR.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase INSTANCE;
 

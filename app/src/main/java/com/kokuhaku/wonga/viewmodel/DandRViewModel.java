@@ -45,4 +45,8 @@ public class DandRViewModel extends AndroidViewModel {
     public LiveData<List<DandR>> getAllReceivables() {
         return allReceivables;
     }
+
+    public Integer GetLastId(){
+        return appRepository.getLatestDandRId();
+    }
 }

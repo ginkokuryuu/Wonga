@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
 import com.kokuhaku.wonga.utils.DateConverterBalance;
+import com.kokuhaku.wonga.utils.DateConverterNotif;
 
 import java.util.Date;
 
@@ -22,11 +23,18 @@ public class DandR {
     @TypeConverters(DateConverterBalance.class)
     private Date tanggal;
 
-    public DandR(int type, String person, int jumlah, Date tanggal) {
+    @TypeConverters(DateConverterNotif.class)
+    private Date dueDate;
+
+    private int notifId;
+
+    public DandR(int type, String person, int jumlah, Date tanggal, Date dueDate, int notifId) {
         this.type = type;
         this.person = person;
         this.jumlah = jumlah;
         this.tanggal = tanggal;
+        this.dueDate = dueDate;
+        this.notifId = notifId;
     }
 
     public void setId(int id) {
@@ -49,5 +57,13 @@ public class DandR {
 
     public Date getTanggal() {
         return tanggal;
+    }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public int getNotifId() {
+        return notifId;
     }
 }

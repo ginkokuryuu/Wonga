@@ -28,4 +28,7 @@ public interface DandRDao {
     @Query("SELECT * FROM dandr_table WHERE type = 1 ORDER BY tanggal ASC")
     LiveData<List<DandR>> GetAllReceivables();
 
+    @Query("SELECT id FROM dandr_table ORDER BY id DESC LIMIT 1")
+    Integer GetLatestId();
+
 }

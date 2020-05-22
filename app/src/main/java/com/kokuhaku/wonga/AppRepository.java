@@ -15,9 +15,8 @@ import com.kokuhaku.wonga.model.entity.Expenses;
 import com.kokuhaku.wonga.model.entity.Report;
 import com.kokuhaku.wonga.utils.AppUtils;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class AppRepository {
     private BalanceDao balanceDao;
@@ -36,6 +35,8 @@ public class AppRepository {
     private DandRDao dandRDao;
     private LiveData<List<DandR>> allDebts;
     private LiveData<List<DandR>> allReceivables;
+
+    private int latestDandRId;
 
     public AppRepository(Application application) {
         AppDatabase database = AppDatabase.GetInstance(application);
@@ -152,6 +153,17 @@ public class AppRepository {
 
             dandRDao.Delete(dandR);
         });
+    }
+
+    public Integer getLatestDandRId(){
+        AppDatabase.databaseWriterExecutor.submit(new Runnable() {
+            @Override
+            public void run() {
+                latestDandRId = dandRDao.GetLatestId();
+                Log.d("DANDRID", "getLatestDandRId: " + latestDandRId);
+            }
+        });
+        return latestDandRId;
     }
 
     public LiveData<Integer> getCurrentBalanceLive() {
